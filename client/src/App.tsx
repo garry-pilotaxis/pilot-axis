@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 import { ChatWidget } from "@/components/ui/chat-widget";
 import { MeshBlobs } from "@/components/ui/mesh-blobs";
+import { RobotCharacter } from "@/components/ui/robot-character";
 
 // Pages
 import Home from "@/pages/Home";
@@ -64,6 +65,7 @@ function Router() {
     <div className="flex flex-col min-h-screen">
       <Background />
       <MeshBlobs />
+      <RobotCharacter />
       <CustomCursor />
       <Navbar />
       <main className="flex-grow">
