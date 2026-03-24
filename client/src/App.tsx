@@ -20,9 +20,48 @@ import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
 import NotFound from "@/pages/not-found";
 
+/** Fixed full-screen background: dark base + purple glow + grid lines */
+function Background() {
+  return (
+    <div className="fixed inset-0 pointer-events-none select-none" style={{ zIndex: -2 }}>
+      {/* 1 — deep navy base */}
+      <div className="absolute inset-0" style={{ background: "#06060f" }} />
+
+      {/* 2 — purple/indigo radial glow — top-right */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 65% 55% at 82% 0%, rgba(99,83,235,0.26) 0%, transparent 68%)",
+        }}
+      />
+
+      {/* 3 — secondary subtle glow — bottom-left */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 45% 40% at 10% 100%, rgba(80,60,200,0.10) 0%, transparent 70%)",
+        }}
+      />
+
+      {/* 4 — grid lines */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.038) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.038) 1px, transparent 1px)",
+          backgroundSize: "58px 58px",
+        }}
+      />
+    </div>
+  );
+}
+
 function Router() {
   return (
     <div className="flex flex-col min-h-screen">
+      <Background />
       <CustomCursor />
       <Navbar />
       <main className="flex-grow">

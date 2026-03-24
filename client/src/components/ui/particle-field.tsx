@@ -111,7 +111,7 @@ export function ParticleField() {
       cursorVx *= 0.82;
       cursorVy *= 0.82;
 
-      ctx.fillStyle = "#ffffff";   // difference blend → black on white, white on black
+      ctx.fillStyle = "rgba(200,192,255,1)"; // soft lavender — visible on dark bg
 
       for (const p of particles) {
         // ── cursor drag ──────────────────────────────────────────────────
@@ -174,7 +174,7 @@ export function ParticleField() {
     <canvas
       ref={canvasRef}
       className="pointer-events-none fixed inset-0"
-      style={{ zIndex: 1, mixBlendMode: "difference" }}
+      style={{ zIndex: 1 }}
     />
   );
 }

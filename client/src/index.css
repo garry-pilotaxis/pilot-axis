@@ -35,49 +35,54 @@
   --font-heading: var(--font-heading);
 }
 
+/* ─── Dark theme colour tokens ───────────────────────────────────────────── */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 0 0% 0%;
+  --background:    243 75% 3%;          /* #06060f  deep navy-black   */
+  --foreground:    0   0%  98%;         /* #fafafa  near-white        */
 
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 0%;
+  --card:          243 60% 5%;          /* #0a0a18  elevated card     */
+  --card-foreground: 0 0% 98%;
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 0%;
+  --popover:       243 60% 5%;
+  --popover-foreground: 0 0% 98%;
 
-  --primary: 0 0% 0%;
+  --primary:       249 80% 65%;         /* #7269ea  purple            */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 0 0% 96%;
-  --secondary-foreground: 0 0% 0%;
+  --secondary:     243 40% 9%;          /* #0f0f22  slightly lighter  */
+  --secondary-foreground: 0 0% 85%;
 
-  --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 40%;
+  --muted:         243 40% 9%;
+  --muted-foreground: 243 15% 55%;      /* muted gray                 */
 
-  --accent: 0 0% 96%;
-  --accent-foreground: 0 0% 0%;
+  --accent:        249 80% 65%;
+  --accent-foreground: 0 0% 100%;
 
-  --destructive: 0 84% 60%;
+  --destructive:   0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 0 0% 90%;
-  --input: 0 0% 90%;
-  --ring: 0 0% 0%;
+  --border:        0 0% 16%;            /* #292929 — subtle dark line */
+  --input:         0 0% 16%;
+  --ring:          249 80% 65%;
+
+  /* brand extras */
+  --purple:        109 92 231;          /* rgb for inline use */
+  --green-accent:  74 222 128;
 
   --radius: 0rem;
 
-  --font-sans: 'Inter', sans-serif;
+  --font-sans:    'Inter', sans-serif;
   --font-heading: 'Space Grotesk', sans-serif;
 }
 
-/* ─── Film grain overlay ─────────────────────────────────────────────────── */
+/* ─── Film grain — global ────────────────────────────────────────────────── */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.028;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 200px 200px;
@@ -85,37 +90,38 @@ body::after {
 
 /* ─── Base ───────────────────────────────────────────────────────────────── */
 @layer base {
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
+
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* dark base so no white flash on overscroll */
+    background: #06060f;
   }
+
   body {
-    @apply font-sans antialiased bg-background text-foreground selection:bg-black selection:text-white;
+    @apply font-sans antialiased text-foreground selection:bg-[#7269ea] selection:text-white;
     cursor: none;
+    background: #06060f;
   }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading tracking-tight text-balance;
   }
-  /* restore cursor on interactive elements */
+
   a, button, [role="button"], input, textarea, select, label {
     cursor: none;
   }
 }
 
 /* ─── Custom cursor ─────────────────────────────────────────────────────── */
-
-/* precision dot — tracks exactly */
+/* precision dot */
 .cursor-dot {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 3px;
-  background: #000;
+  top: 0; left: 0;
+  width: 3px; height: 3px;
+  background: #fff;              /* white by default — dark site   */
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
@@ -123,13 +129,11 @@ body::after {
   transition: background 0.2s ease, opacity 0.2s ease;
 }
 
-/* viewfinder bracket — lags slightly */
+/* viewfinder bracket */
 .cursor-bracket {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 30px;
+  top: 0; left: 0;
+  width: 30px; height: 30px;
   pointer-events: none;
   z-index: 99998;
   transform: translate(-50%, -50%);
@@ -138,9 +142,8 @@ body::after {
 
 .cursor-bracket span {
   position: absolute;
-  width: 8px;
-  height: 8px;
-  border-color: #000;
+  width: 8px; height: 8px;
+  border-color: rgba(255,255,255,0.7);
   border-style: solid;
   transition: border-color 0.2s ease;
 }
@@ -150,25 +153,15 @@ body::after {
 .cursor-bracket .bl { bottom: 0; left: 0;  border-width: 0 0 1.5px 1.5px; }
 .cursor-bracket .br { bottom: 0; right: 0; border-width: 0 1.5px 1.5px 0; }
 
-/* hover — bracket closes in */
-body.cursor-hover .cursor-bracket {
-  width: 18px;
-  height: 18px;
-}
-body.cursor-hover .cursor-dot {
-  opacity: 0;
-}
+/* hover — bracket closes, dot hides */
+body.cursor-hover .cursor-bracket { width: 18px; height: 18px; }
+body.cursor-hover .cursor-dot     { opacity: 0; }
 
-/* dark sections — flip to white */
-body.cursor-dark .cursor-dot {
-  background: #fff;
-}
-body.cursor-dark .cursor-bracket span {
-  border-color: #fff;
-}
+/* when over a LIGHT element — flip to dark */
+body.cursor-dark .cursor-dot { background: #000; }
+body.cursor-dark .cursor-bracket span { border-color: rgba(0,0,0,0.7); }
 
 /* ─── Button sweep micro-interaction ────────────────────────────────────── */
-/* slide a subtle highlight from left on hover */
 .btn-sweep {
   position: relative;
   overflow: hidden;
@@ -178,7 +171,7 @@ body.cursor-dark .cursor-bracket span {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.12);
   transform: translateX(-101%);
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 0;
@@ -186,7 +179,6 @@ body.cursor-dark .cursor-bracket span {
 }
 .btn-sweep:hover::before { transform: translateX(0); }
 
-/* for light/outline buttons — sweep is dark */
 .btn-sweep-outline {
   position: relative;
   overflow: hidden;
@@ -196,7 +188,7 @@ body.cursor-dark .cursor-bracket span {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(255, 255, 255, 0.06);
   transform: translateX(-101%);
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 0;
@@ -204,7 +196,7 @@ body.cursor-dark .cursor-bracket span {
 }
 .btn-sweep-outline:hover::before { transform: translateX(0); }
 
-/* ─── Dark section — enhanced noise grain ───────────────────────────────── */
+/* ─── Enhanced grain for accent sections ───────────────────────────────── */
 .section-dark::after {
   content: '';
   position: absolute;
@@ -212,7 +204,7 @@ body.cursor-dark .cursor-bracket span {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 200px 200px;
-  opacity: 0.055;
+  opacity: 0.07;
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: overlay;
@@ -223,11 +215,13 @@ body.cursor-dark .cursor-bracket span {
   .hover-lift {
     @apply transition-transform duration-300 ease-out hover:-translate-y-1;
   }
+
+  /* underline link — white for dark theme */
   .minimal-link {
-    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-black after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100;
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100;
   }
 
-  /* Premium card hover */
+  /* card hover — purple glow on dark theme */
   .card-premium {
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 box-shadow 0.3s ease,
@@ -235,20 +229,28 @@ body.cursor-dark .cursor-bracket span {
   }
   .card-premium:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 40px -8px rgba(0,0,0,0.12);
-    border-color: rgba(0,0,0,0.2);
+    box-shadow: 0 12px 40px -8px rgba(109, 92, 231, 0.3);
+    border-color: rgba(109, 92, 231, 0.3);
   }
 
-  /* Subtle dot grid background */
+  /* subtle white dot grid */
   .dot-grid {
-    background-image: radial-gradient(circle, rgba(0,0,0,0.12) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
-  /* Horizontal rule with fade */
+  /* fade rule — white for dark theme */
   .hr-fade {
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba(0,0,0,0.15), transparent);
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
     border: none;
+  }
+
+  /* purple gradient text */
+  .text-purple-grad {
+    background: linear-gradient(135deg, #7c6ff0, #c4b5fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

@@ -1,0 +1,449 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin: 2rem 0 0.75rem;
+  }
+
+  .ads-grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  /* ── AD 1: Square social (1080×1080) ── */
+  .ad-square {
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 1 / 1;
+    background: #0a0a0f;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 36px;
+  }
+  .ad-square .grid-lines {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .ad-square .orb {
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99,75,220,0.35) 0%, transparent 70%);
+    right: -80px; top: -80px;
+  }
+  .ad-square .orb2 {
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,158,117,0.25) 0%, transparent 70%);
+    left: -40px; bottom: 60px;
+  }
+  .ad-square .top { position: relative; z-index: 2; }
+  .ad-square .logo-tag {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(255,255,255,0.07);
+    border: 0.5px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+    padding: 5px 14px 5px 8px;
+  }
+  .ad-square .logo-dot {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: linear-gradient(135deg, #7f77dd, #1d9e75);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ad-square .logo-dot span {
+    font-size: 9px; font-weight: 700; color: #fff; letter-spacing: -0.5px;
+  }
+  .ad-square .logo-name { font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.7); letter-spacing: 0.03em; }
+
+  .ad-square .middle { position: relative; z-index: 2; }
+  .ad-square .eyebrow {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.15em;
+    color: #1d9e75; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .ad-square .headline {
+    font-size: 34px; font-weight: 700; line-height: 1.1;
+    color: #fff; letter-spacing: -0.03em;
+  }
+  .ad-square .headline em { font-style: normal; color: #7f77dd; }
+  .ad-square .subline {
+    margin-top: 14px; font-size: 13px; font-weight: 400;
+    color: rgba(255,255,255,0.5); line-height: 1.5; max-width: 280px;
+  }
+
+  .ad-square .bottom { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; }
+  .ad-square .cta-btn {
+    background: #7f77dd; color: #fff;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 10px 20px; border-radius: 999px; border: none;
+    white-space: nowrap;
+  }
+  .ad-square .stat-row { display: flex; gap: 18px; }
+  .ad-square .stat { text-align: center; }
+  .ad-square .stat .num { font-size: 16px; font-weight: 700; color: #fff; }
+  .ad-square .stat .lbl { font-size: 9px; color: rgba(255,255,255,0.4); margin-top: 1px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ── AD 2: Landscape banner (1200×628) ── */
+  .ad-banner {
+    width: 100%;
+    aspect-ratio: 1200 / 628;
+    background: #06080f;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 32px 40px;
+  }
+  .ad-banner .bg-accent {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 55%, rgba(29,158,117,0.08) 100%);
+  }
+  .ad-banner .divider {
+    position: absolute;
+    left: 50%; top: 15%; bottom: 15%;
+    width: 0.5px;
+    background: rgba(255,255,255,0.08);
+  }
+  .ad-banner .left { position: relative; z-index: 2; }
+  .ad-banner .pill {
+    display: inline-block;
+    background: rgba(127,119,221,0.18);
+    border: 0.5px solid rgba(127,119,221,0.4);
+    color: #a9a3e8;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 4px 12px; border-radius: 999px; margin-bottom: 14px;
+  }
+  .ad-banner .h1 {
+    font-size: clamp(20px, 3.5vw, 30px);
+    font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -0.02em;
+  }
+  .ad-banner .h1 em { font-style: normal; color: #1d9e75; }
+  .ad-banner .body {
+    margin-top: 12px; font-size: 12px;
+    color: rgba(255,255,255,0.45); line-height: 1.6; max-width: 300px;
+  }
+  .ad-banner .cta {
+    margin-top: 20px; display: inline-flex; align-items: center; gap: 8px;
+    background: #fff; color: #0a0a0f;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+    padding: 9px 20px; border-radius: 999px;
+  }
+  .ad-banner .cta-arrow { font-size: 14px; }
+
+  .ad-banner .right { position: relative; z-index: 2; padding-left: 40px; }
+  .ad-banner .feat-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .ad-banner .feat-item {
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .ad-banner .feat-icon {
+    width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+  }
+  .ad-banner .feat-icon.purple { background: rgba(127,119,221,0.15); }
+  .ad-banner .feat-icon.green  { background: rgba(29,158,117,0.15); }
+  .ad-banner .feat-icon.amber  { background: rgba(186,117,23,0.15); }
+  .ad-banner .feat-text .ft { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.85); }
+  .ad-banner .feat-text .fs { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 1px; }
+
+  .ad-banner .wordmark {
+    position: absolute; bottom: 18px; right: 24px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.2); text-transform: uppercase;
+  }
+
+  /* ── AD 3: Story / vertical (1080×1920) ── */
+  .ad-story {
+    width: 100%;
+    max-width: 270px;
+    aspect-ratio: 9 / 16;
+    background: #07050f;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 28px 24px 32px;
+  }
+  .ad-story .rings {
+    position: absolute;
+    left: 50%; top: 38%;
+    transform: translate(-50%, -50%);
+    width: 340px; height: 340px;
+  }
+  .ring {
+    position: absolute; border-radius: 50%;
+    border: 0.5px solid rgba(127,119,221,0.15);
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .ad-story .center-icon {
+    position: absolute; left: 50%; top: 38%;
+    transform: translate(-50%, -50%);
+    width: 72px; height: 72px; border-radius: 50%;
+    background: linear-gradient(135deg, #534ab7, #0f6e56);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 3;
+  }
+  .ad-story .center-icon .pa {
+    font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -1px;
+  }
+  .ad-story .orbit-dot {
+    position: absolute; width: 8px; height: 8px; border-radius: 50%;
+    z-index: 3;
+  }
+
+  .ad-story .s-top { position: relative; z-index: 5; }
+  .ad-story .s-brand {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.5);
+  }
+  .ad-story .s-tag {
+    display: inline-block; margin-top: 6px;
+    background: rgba(127,119,221,0.2); border: 0.5px solid rgba(127,119,221,0.35);
+    color: #aba5e6; font-size: 9px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 999px;
+  }
+
+  .ad-story .s-bottom { position: relative; z-index: 5; }
+  .ad-story .s-headline {
+    font-size: 26px; font-weight: 800; line-height: 1.1;
+    color: #fff; letter-spacing: -0.03em; margin-bottom: 10px;
+  }
+  .ad-story .s-headline em { font-style: normal; color: #1d9e75; }
+  .ad-story .s-body {
+    font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.55; margin-bottom: 18px;
+  }
+  .ad-story .s-cta {
+    width: 100%; padding: 13px; border-radius: 12px;
+    background: linear-gradient(135deg, #534ab7, #0f6e56);
+    color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+    text-align: center; border: none;
+  }
+  .ad-story .s-url {
+    margin-top: 10px; text-align: center;
+    font-size: 10px; color: rgba(255,255,255,0.25); letter-spacing: 0.06em;
+  }
+
+  /* ── AD 4: Retargeting / objection-busting ── */
+  .ad-retarget {
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 1 / 1;
+    background: #fff;
+    border-radius: 16px;
+    border: 0.5px solid rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px;
+  }
+  .ad-retarget .accent-bar {
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #534ab7, #1d9e75);
+  }
+  .ad-retarget .rt-top {}
+  .ad-retarget .rt-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #534ab7; margin-bottom: 12px;
+  }
+  .ad-retarget .rt-headline {
+    font-size: 28px; font-weight: 800; line-height: 1.15;
+    color: #0a0a0f; letter-spacing: -0.03em;
+  }
+  .ad-retarget .rt-headline em { font-style: normal; color: #534ab7; }
+
+  .ad-retarget .rt-mid { display: flex; flex-direction: column; gap: 10px; }
+  .ad-retarget .proof-row {
+    display: flex; align-items: center; gap: 10px;
+    background: #f5f4fe; border-radius: 10px; padding: 10px 14px;
+  }
+  .ad-retarget .proof-icon {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: #534ab7; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
+  }
+  .ad-retarget .proof-text .pt { font-size: 12px; font-weight: 700; color: #0a0a0f; }
+  .ad-retarget .proof-text .ps { font-size: 11px; color: #888; margin-top: 1px; }
+
+  .ad-retarget .rt-bottom { display: flex; align-items: center; justify-content: space-between; }
+  .ad-retarget .rt-cta {
+    background: #0a0a0f; color: #fff;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 11px 22px; border-radius: 999px; border: none;
+  }
+  .ad-retarget .rt-brand {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #bbb;
+  }
+
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+</style>
+
+<p class="section-label">Ad 1 — Square social (1080 × 1080)</p>
+
+<div class="ad-square">
+  <div class="grid-lines"></div>
+  <div class="orb"></div>
+  <div class="orb2"></div>
+
+  <div class="top">
+    <div class="logo-tag">
+      <div class="logo-dot"><span>PA</span></div>
+      <span class="logo-name">Pilot Axis</span>
+    </div>
+  </div>
+
+  <div class="middle">
+    <div class="eyebrow">AI Voice + Automation</div>
+    <div class="headline">Your business<br>runs <em>itself.</em><br>You just grow.</div>
+    <div class="subline">AI voice agents that answer calls, book appointments, and follow up — 24/7, without hiring anyone.</div>
+  </div>
+
+  <div class="bottom">
+    <div class="stat-row">
+      <div class="stat"><div class="num">24/7</div><div class="lbl">Always on</div></div>
+      <div class="stat"><div class="num">0 min</div><div class="lbl">Response time</div></div>
+      <div class="stat"><div class="num">+40%</div><div class="lbl">More bookings</div></div>
+    </div>
+    <button class="cta-btn">pilotaxis.ca →</button>
+  </div>
+</div>
+
+<p class="section-label">Ad 2 — Landscape / Facebook & LinkedIn (1200 × 628)</p>
+
+<div class="ad-banner">
+  <div class="bg-accent"></div>
+  <div class="divider"></div>
+
+  <div class="left">
+    <div class="pill">AI Automation Agency</div>
+    <div class="h1">Stop losing leads<br>to <em>missed calls.</em></div>
+    <div class="body">Pilot Axis builds AI voice agents and automation workflows that work while you sleep — capturing every lead, booking every appointment.</div>
+    <button class="cta">
+      <span>Book a free demo</span>
+      <span class="cta-arrow">→</span>
+    </button>
+  </div>
+
+  <div class="right">
+    <ul class="feat-list">
+      <li class="feat-item">
+        <div class="feat-icon purple">📞</div>
+        <div class="feat-text">
+          <div class="ft">AI voice agents</div>
+          <div class="fs">Answer & qualify every inbound call</div>
+        </div>
+      </li>
+      <li class="feat-item">
+        <div class="feat-icon green">⚡</div>
+        <div class="feat-text">
+          <div class="ft">Make.com workflows</div>
+          <div class="fs">End-to-end automation, zero manual work</div>
+        </div>
+      </li>
+      <li class="feat-item">
+        <div class="feat-icon amber">📅</div>
+        <div class="feat-text">
+          <div class="ft">Auto-scheduling</div>
+          <div class="fs">Bookings straight to your calendar</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="wordmark">pilotaxis.ca</div>
+</div>
+
+<p class="section-label">Ad 3 — Story / Reel (1080 × 1920) &nbsp;&nbsp; Ad 4 — Retargeting (1080 × 1080)</p>
+
+<div class="row-2">
+  <div class="ad-story">
+    <div class="rings">
+      <div class="ring" style="width:90px;height:90px;"></div>
+      <div class="ring" style="width:150px;height:150px;"></div>
+      <div class="ring" style="width:210px;height:210px;"></div>
+      <div class="ring" style="width:270px;height:270px;"></div>
+      <div class="ring" style="width:330px;height:330px;"></div>
+    </div>
+    <div class="center-icon"><span class="pa">PA</span></div>
+    <div class="orbit-dot" style="background:#7f77dd;top:calc(38% - 105px);left:50%;"></div>
+    <div class="orbit-dot" style="background:#1d9e75;top:calc(38% + 65px);left:calc(50% + 90px);"></div>
+    <div class="orbit-dot" style="background:#ef9f27;top:calc(38% + 30px);left:calc(50% - 105px);"></div>
+
+    <div class="s-top">
+      <div class="s-brand">Pilot Axis</div>
+      <div class="s-tag">AI Automation</div>
+    </div>
+
+    <div class="s-bottom">
+      <div class="s-headline">What if your<br>phone never<br>went to <em>voicemail?</em></div>
+      <div class="s-body">Our AI agents pick up every call, qualify leads, and book appointments — automatically.</div>
+      <button class="s-cta">See it in action →</button>
+      <div class="s-url">pilotaxis.ca</div>
+    </div>
+  </div>
+
+  <div class="ad-retarget">
+    <div class="accent-bar"></div>
+
+    <div class="rt-top">
+      <div class="rt-label">Still on the fence?</div>
+      <div class="rt-headline">Your competitors<br>just got an<br><em>AI employee.</em></div>
+    </div>
+
+    <div class="rt-mid">
+      <div class="proof-row">
+        <div class="proof-icon">✓</div>
+        <div class="proof-text">
+          <div class="pt">No monthly salary</div>
+          <div class="ps">Flat monthly fee, cancel anytime</div>
+        </div>
+      </div>
+      <div class="proof-row">
+        <div class="proof-icon">✓</div>
+        <div class="proof-text">
+          <div class="pt">Live in under a week</div>
+          <div class="ps">We build and launch it for you</div>
+        </div>
+      </div>
+      <div class="proof-row">
+        <div class="proof-icon">✓</div>
+        <div class="proof-text">
+          <div class="pt">Works while you sleep</div>
+          <div class="ps">24/7 calls, bookings & follow-ups</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rt-bottom">
+      <button class="rt-cta">Book a free call</button>
+      <div class="rt-brand">Pilot Axis</div>
+    </div>
+  </div>
+</div>
