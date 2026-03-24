@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // ── palette ────────────────────────────────────────────────────────────────────
 const C  = "#9b8bf4";
-const PD = "rgba(109,92,231,0.18)";
 const PB = "rgba(109,92,231,0.32)";
 
 // ── jokes (cycling, never the same twice in a row) ────────────────────────────
@@ -78,36 +77,18 @@ function Bubble({ text, isHi }: { text: string; isHi?: boolean }) {
   );
 }
 
-// ── thruster ──────────────────────────────────────────────────────────────────
-function Thruster() {
-  return (
-    <motion.div
-      animate={{ scaleY: [0.7, 1.4, 0.6, 1.2, 0.8], opacity: [0.7, 0.4, 0.9, 0.5, 0.7] }}
-      transition={{ duration: 0.35, repeat: Infinity }}
-      style={{
-        position: "absolute",
-        bottom: -14, left: "50%", marginLeft: -6,
-        width: 12, height: 18,
-        background: "linear-gradient(to bottom, rgba(155,139,244,0.95), rgba(109,92,231,0.4), transparent)",
-        borderRadius: "0 0 50% 50%",
-        transformOrigin: "top center",
-        filter: "blur(2px)",
-      }}
-    />
-  );
-}
-
 // ── robot svg ─────────────────────────────────────────────────────────────────
-function RobotSVG({ phase }: { phase: Phase }) {
+type Phase = "falling" | "waving" | "resting";
+
+function RobotSVG({ phase, laughing }: { phase: Phase; laughing: boolean }) {
   const waving  = phase === "waving";
-  const flying  = phase === "flying";
-  const resting = phase === "resting";
+  const resting = phase === "resting" && !laughing;
 
   return (
     <svg width="68" height="92" viewBox="0 0 68 92" fill="none" style={{ overflow: "visible" }}>
       <defs>
-        <filter id="rg2"><feGaussianBlur stdDeviation="2.5" result="b" /><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <filter id="eg2"><feGaussianBlur stdDeviation="3.5" result="b" /><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="rg2"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="eg2"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
 
       {/* antenna */}
@@ -120,9 +101,20 @@ function RobotSVG({ phase }: { phase: Phase }) {
       {/* head */}
       <rect x="11" y="14" width="46" height="32" rx="9" stroke={C} strokeWidth="1.6" filter="url(#rg2)"/>
 
-      {/* eyes — blink when resting */}
-      <motion.g animate={resting ? { scaleY: [1, 1, 0.1, 1, 1, 1, 1, 0.1, 1] } : {}}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      {/* eyes — rapid squint when laughing, slow blink when resting */}
+      <motion.g
+        animate={
+          laughing
+            ? { scaleY: [1, 0.08, 1, 0.08, 1, 0.08, 1] }
+            : resting
+            ? { scaleY: [1, 1, 0.1, 1, 1, 1, 1, 0.1, 1] }
+            : {}
+        }
+        transition={
+          laughing
+            ? { duration: 0.28, repeat: 5, ease: "easeInOut" }
+            : { duration: 4, repeat: Infinity, ease: "easeInOut" }
+        }
         style={{ transformOrigin: "34px 29px" }}
       >
         <circle cx="25" cy="29" r="5" fill={C} filter="url(#eg2)" opacity="0.9"/>
@@ -131,9 +123,11 @@ function RobotSVG({ phase }: { phase: Phase }) {
         <circle cx="45" cy="27" r="1.6" fill="rgba(255,255,255,0.9)"/>
       </motion.g>
 
-      {/* mouth — smile or smirk */}
-      <path d={resting ? "M22 38 Q34 46 46 38" : "M21 39 Q34 47 47 39"}
-        stroke={C} strokeWidth="1.6" strokeLinecap="round" fill="none" filter="url(#rg2)"/>
+      {/* mouth — huge grin when laughing */}
+      <path
+        d={laughing ? "M18 35 Q34 54 50 35" : resting ? "M22 38 Q34 46 46 38" : "M21 39 Q34 47 47 39"}
+        stroke={C} strokeWidth="1.6" strokeLinecap="round" fill="none" filter="url(#rg2)"
+      />
 
       {/* body */}
       <rect x="14" y="51" width="40" height="29" rx="7" stroke={C} strokeWidth="1.6" filter="url(#rg2)"/>
@@ -143,17 +137,17 @@ function RobotSVG({ phase }: { phase: Phase }) {
         transition={{ duration: 1.3, repeat: Infinity }}
       />
 
-      {/* LEFT arm — waves */}
+      {/* LEFT arm — flails wildly when laughing, waves when waving */}
       <motion.g style={{ transformOrigin: "14px 56px" }}
         animate={
-          waving  ? { rotate: [8, -52, 14, -52, 14, -52, 8, 0] } :
-          flying  ? { rotate: [0, 10, -10, 0] } :
-          resting ? { rotate: [0, -12, 0] } : { rotate: 0 }
+          laughing  ? { rotate: [-72, -8, -78, -5, -72, -8, 0] } :
+          waving    ? { rotate: [8, -52, 14, -52, 14, -52, 8, 0] } :
+          resting   ? { rotate: [0, -12, 0] } : { rotate: 0 }
         }
         transition={
-          waving  ? { duration: 2.6, ease: "easeInOut" } :
-          flying  ? { duration: 1.1, repeat: Infinity } :
-          resting ? { duration: 3.5, repeat: Infinity, ease: "easeInOut" } :
+          laughing  ? { duration: 0.25, repeat: 6, ease: "easeInOut" } :
+          waving    ? { duration: 2.6, ease: "easeInOut" } :
+          resting   ? { duration: 3.5, repeat: Infinity, ease: "easeInOut" } :
           {}
         }
       >
@@ -162,19 +156,30 @@ function RobotSVG({ phase }: { phase: Phase }) {
         {waving && <line x1="2" y1="53" x2="2" y2="49" stroke={C} strokeWidth="1.4" strokeLinecap="round" opacity="0.7"/>}
       </motion.g>
 
-      {/* RIGHT arm */}
+      {/* RIGHT arm — flails wildly when laughing */}
       <motion.g style={{ transformOrigin: "54px 56px" }}
-        animate={flying ? { rotate: [0, -10, 10, 0] } : resting ? { rotate: [0, 12, 0] } : { rotate: 0 }}
-        transition={flying ? { duration: 1.1, repeat: Infinity, delay: 0.3 } : resting ? { duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 } : {}}
+        animate={
+          laughing ? { rotate: [72, 8, 78, 5, 72, 8, 0] } :
+          resting  ? { rotate: [0, 12, 0] } : { rotate: 0 }
+        }
+        transition={
+          laughing ? { duration: 0.25, repeat: 6, ease: "easeInOut" } :
+          resting  ? { duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 } :
+          {}
+        }
       >
         <rect x="54" y="53" width="13" height="8" rx="4" stroke={C} strokeWidth="1.5" filter="url(#rg2)"/>
         <circle cx="66" cy="57" r="4.2" stroke={C} strokeWidth="1.4" filter="url(#rg2)"/>
       </motion.g>
 
-      {/* legs */}
+      {/* legs — kick up when laughing */}
       <motion.g
-        animate={{ y: resting ? [0, -2, 0] : flying ? [-2, 2, -2] : 0 }}
-        transition={{ duration: resting ? 2 : 0.8, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ y: laughing ? [0, -9, 0, -7, 0, -5, 0] : resting ? [0, -2, 0] : 0 }}
+        transition={{
+          duration: laughing ? 0.25 : resting ? 2 : 0.8,
+          repeat: laughing ? 5 : Infinity,
+          ease: "easeInOut",
+        }}
       >
         <rect x="19" y="80" width="12" height="12" rx="5" stroke={C} strokeWidth="1.5" filter="url(#rg2)"/>
         <rect x="37" y="80" width="12" height="12" rx="5" stroke={C} strokeWidth="1.5" filter="url(#rg2)"/>
@@ -184,34 +189,44 @@ function RobotSVG({ phase }: { phase: Phase }) {
 }
 
 // ── main component ─────────────────────────────────────────────────────────────
-type Phase = "falling" | "waving" | "flying" | "resting";
-
 export function RobotCharacter() {
-  const [phase, setPhase]         = useState<Phase>("falling");
+  const [phase, setPhase]           = useState<Phase>("falling");
   const [showBubble, setShowBubble] = useState(false);
-  const [hiMode, setHiMode]       = useState(true);
-  const [jokeIdx, setJokeIdx]     = useState(0);
+  const [hiMode, setHiMode]         = useState(true);
+  const [jokeIdx, setJokeIdx]       = useState(0);
+  const [laughing, setLaughing]     = useState(false);
   const dims = useRef({ w: 1200, h: 800 });
 
   useEffect(() => {
     dims.current = { w: window.innerWidth, h: window.innerHeight };
 
-    // sequence
-    const t1 = setTimeout(() => { setPhase("waving"); setShowBubble(true); },              1100);
-    const t2 = setTimeout(() => { setShowBubble(false); },                                  3300);
-    const t3 = setTimeout(() => { setPhase("flying"); },                                    3700);
-    const t4 = setTimeout(() => {
-      setPhase("resting");
-      setTimeout(() => { setHiMode(false); setJokeIdx(0); setShowBubble(true); }, 600);
-    }, 13700); // 10 s of flying
+    const triggerLaugh = () => {
+      setLaughing(true);
+      setTimeout(() => setLaughing(false), 2100);
+    };
 
-    return () => [t1,t2,t3,t4].forEach(clearTimeout);
+    // sequence: heavy fall → wave hi → spring to corner → jokes + laughing
+    const t1 = setTimeout(() => { setPhase("waving"); setShowBubble(true); }, 1200);
+    const t2 = setTimeout(() => { setShowBubble(false); }, 3400);
+    const t3 = setTimeout(() => { setPhase("resting"); }, 3800);
+    const t4 = setTimeout(() => {
+      setHiMode(false);
+      setJokeIdx(0);
+      setShowBubble(true);
+      triggerLaugh();
+    }, 4600);
+
+    return () => [t1, t2, t3, t4].forEach(clearTimeout);
   }, []);
 
-  // cycle jokes every 5 s while resting
+  // cycle jokes every 15 s while resting
   useEffect(() => {
     if (phase !== "resting" || !showBubble || hiMode) return;
-    const id = setInterval(() => setJokeIdx(p => getNextJoke(p)), 5200);
+    const id = setInterval(() => {
+      setJokeIdx(p => getNextJoke(p));
+      setLaughing(true);
+      setTimeout(() => setLaughing(false), 2100);
+    }, 15000);
     return () => clearInterval(id);
   }, [phase, showBubble, hiMode]);
 
@@ -221,44 +236,43 @@ export function RobotCharacter() {
   const restX = w - 110;
   const restY = h - 140;
 
-  // 10-second flight path touching all corners
-  const fx = [landX, w*.82, w*.08, w*.70, w*.06, w*.85, w*.45, restX];
-  const fy = [landY, h*.08, h*.65, h*.12, h*.55, h*.72, h*.25, restY];
-
-  const bubble = hiMode
-    ? "Hi there! 👋"
-    : JOKES[jokeIdx];
+  const bubble = hiMode ? "Hi there! 👋" : JOKES[jokeIdx];
 
   return (
     <motion.div
       className="pointer-events-none select-none"
       style={{ position: "fixed", left: 0, top: 0, zIndex: 9000 }}
-      initial={{ x: landX, y: -130 }}
+      initial={{ x: landX, y: -220 }}
       animate={
         phase === "falling" || phase === "waving"
           ? { x: landX, y: landY }
-          : phase === "flying"
-          ? { x: fx, y: fy }
           : { x: restX, y: restY }
       }
       transition={
         phase === "falling"
-          ? { type: "spring", damping: 9, stiffness: 70 }
+          ? { type: "spring", damping: 5, stiffness: 230, mass: 2.8 } // heavy, bouncy thud
           : phase === "waving"
           ? {}
-          : phase === "flying"
-          ? { duration: 10, ease: [0.4, 0, 0.2, 1] }
-          : { type: "spring", damping: 14, stiffness: 60 }
+          : { type: "spring", damping: 12, stiffness: 70 }
       }
     >
-      {/* gentle idle float when resting */}
+      {/* whole-body shake during laugh */}
       <motion.div
-        animate={phase === "resting" ? { y: [0, -6, 0] } : {}}
-        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+        animate={
+          laughing
+            ? { rotate: [-5, 5] }
+            : phase === "resting"
+            ? { y: [0, -6, 0] }
+            : {}
+        }
+        transition={
+          laughing
+            ? { duration: 0.11, repeat: 17, repeatType: "mirror", ease: "linear" }
+            : { duration: 2.8, repeat: Infinity, ease: "easeInOut" }
+        }
         style={{ position: "relative", display: "inline-block" }}
       >
-        {phase === "flying" && <Thruster />}
-        <RobotSVG phase={phase} />
+        <RobotSVG phase={phase} laughing={laughing} />
         <AnimatePresence mode="wait">
           {showBubble && <Bubble key={bubble} text={bubble} isHi={hiMode} />}
         </AnimatePresence>
