@@ -23,5 +23,21 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      fetch("https://hook.us2.make.com/ab6q9vqrs27eur2ietu51gnddw3dgs5a", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          page: window.location.pathname,
+          referrer: document.referrer || "Direct",
+          ip: "",
+          country: "",
+          city: "",
+          utm_source: new URLSearchParams(window.location.search).get("utm_source") || "",
+          utm_medium: new URLSearchParams(window.location.search).get("utm_medium") || "",
+          utm_campaign: new URLSearchParams(window.location.search).get("utm_campaign") || ""
+        })
+      });
+    </script>
   </body>
 </html>
