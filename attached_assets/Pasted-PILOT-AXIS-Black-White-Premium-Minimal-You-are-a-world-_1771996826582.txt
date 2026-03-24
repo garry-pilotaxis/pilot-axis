@@ -1,0 +1,318 @@
+PILOT AXIS (Black/White, Premium Minimal)
+
+You are a world-class product designer and conversion-focused brand strategist. Create a premium, ultra-minimalist website for a company called Pilot Axis.
+
+1) Brand & Positioning
+
+Company name: Pilot Axis
+Industry: AI automation + AI voice agents for businesses (call handling, scheduling, lead capture, follow-ups, CRM logging, workflows).
+What we sell: Done-for-you AI systems that replace missed calls, capture leads, book appointments, manage waitlists, and automate operations.
+Target customers: Local service businesses and appointment-based businesses (daycares, clinics, dental, salons, home services, etc.).
+Main outcome: More booked appointments, fewer missed calls, less admin work.
+
+Brand vibe:
+	•	Premium, minimalist, serious, high-trust, “enterprise-ready”
+	•	Not playful, not “startup cute,” not gimmicky AI
+	•	Feels like a control system / command center / precision engineering
+
+2) Visual Style (STRICT)
+
+Color palette: ONLY black and white
+	•	Background: white
+	•	Text: black
+	•	Use very subtle gray shades only if needed for dividers (like 5–10% black), but keep it mostly pure B/W
+	•	No gradients, no bright colors, no illustrations, no stocky “AI robots”
+
+Typography (choose one pairing):
+Option A: Modern premium
+	•	Headings: “Söhne” or “Neue Haas Grotesk” or similar clean grotesk
+	•	Body: “Inter” or “SF Pro” style
+
+Option B: Editorial premium
+	•	Headings: elegant serif like “Canela” or “Tiempos”
+	•	Body: clean sans like “Inter”
+
+Type rules:
+	•	Large, confident headings
+	•	Short lines, lots of whitespace
+	•	Tight system: consistent sizes, consistent spacing
+
+Layout rules:
+	•	12-column grid, wide margins
+	•	Massive whitespace
+	•	Minimal borders (thin 1px lines)
+	•	Subtle hover effects only (underline, slight shift, opacity)
+
+Imagery rules:
+	•	Prefer abstract, monochrome, geometric visuals
+	•	Use simple line icons (monochrome)
+	•	Avoid busy mockups; if used, keep them black/white and clean
+
+3) Site Goals (Conversion)
+
+Primary CTA: Book a Call
+Secondary CTA: Get a Demo or See Use Cases
+Lead capture: short form (name, business, email/phone, message)
+
+Trust:
+	•	Clear offer
+	•	Clear outcomes
+	•	Simple proof section
+	•	Strong FAQs
+	•	Simple process
+	•	Clean pricing (optional)
+
+4) Navigation + Header (Sticky)
+
+Create a sticky header with:
+	•	Left: PILOT AXIS wordmark (text-based logo; no icon needed)
+	•	Right nav links: Solutions, Use Cases, Process, Pricing, About, Contact
+	•	Primary button: Book a Call (black button, white text)
+	•	Mobile: hamburger menu, same links, CTA button pinned at bottom
+
+Header should be thin, premium, with subtle bottom border line.
+
+5) Pages Needed
+
+Create these pages with consistent design system:
+	1.	Home
+	2.	Solutions (What we build)
+	3.	Use Cases (Industries + examples)
+	4.	Process (How it works)
+	5.	Pricing (Simple tiers)
+	6.	About (Story + why trust)
+	7.	Contact (form + calendar embed placeholder)
+	8.	Privacy Policy (simple)
+	9.	Terms (simple)
+
+6) HOME PAGE — Sections (in exact order)
+
+Hero (above the fold):
+	•	Headline (very short, powerful):
+“AI call systems that book appointments and capture every lead.”
+	•	Subheadline:
+“Pilot Axis builds done-for-you AI voice and workflow automation for appointment-based businesses—so you stop missing calls and stop wasting hours on admin.”
+	•	Two CTAs:
+Primary: Book a Call
+Secondary: See Use Cases
+	•	Add a minimal “trust strip” below hero:
+“Built for: Daycares • Clinics • Dental • Home Services • Salons”
+	•	Add a small line under that: “24/7 answering. Real scheduling. Real operations.”
+
+Problem / Reality Check section (short, blunt):
+Title: “Most businesses lose revenue on the phone.”
+Bullets (short):
+	•	Missed calls = lost bookings
+	•	Slow replies = cold leads
+	•	Manual scheduling = chaos
+	•	No tracking = no improvement
+
+What Pilot Axis Does (3 cards):
+Card 1: “Answer + Qualify”
+Card 2: “Book + Manage”
+Card 3: “Follow Up + Report”
+Each card: 1–2 lines.
+
+Solutions preview (4 modules):
+	•	AI Voice Agent (calls, FAQs, routing)
+	•	Scheduling Engine (book/reschedule/cancel, multi-calendar)
+	•	CRM + Waitlist (Airtable/Sheets logging, FCFS sorting)
+	•	Automation Layer (emails/SMS, follow-ups, reminders, dashboards)
+
+Use cases grid:
+Show 6 tiles with short outcomes:
+	•	Daycare: waitlist + tour scheduling
+	•	Dental: booking + reminders + cancellations
+	•	Clinic: intake + routing
+	•	Salon: appointment flow + no-show reduction
+	•	Home services: quote intake + scheduling
+	•	Any appointment business: missed-call recovery
+
+Proof / Credibility (minimal but strong):
+	•	“What you get is not a bot. It’s a system.”
+	•	3 proof points:
+	•	“Structured data + CRM logging”
+	•	“Full call transcripts + recordings”
+	•	“Monthly optimization + monitoring”
+Add placeholders for testimonials (3 simple quotes) even if empty for now.
+
+Process preview (4 steps):
+	1.	Audit (your calls + booking flow)
+	2.	Build (agent + workflows + integrations)
+	3.	Launch (testing + go-live)
+	4.	Optimize (reports + iteration)
+
+Pricing preview (3 tiers):
+	•	Starter: “AI Receptionist”
+	•	Growth: “Scheduling + CRM”
+	•	Premium: “Full Operations System”
+Each with 4–6 bullet inclusions and “Book a Call” button.
+
+FAQ (8 questions):
+	•	Will it sound human?
+	•	Can it book in my calendar?
+	•	Can it reschedule/cancel?
+	•	Can it handle multiple staff/calendars?
+	•	What happens with complex questions?
+	•	Can it log into our CRM?
+	•	How long to launch?
+	•	What does it cost?
+
+Final CTA section (clean, big):
+Headline: “Stop missing calls. Start controlling your pipeline.”
+Buttons: Book a Call (primary) + Contact (secondary)
+
+Footer:
+	•	Links: Solutions / Use Cases / Process / Pricing / About / Contact
+	•	Small text: Privacy, Terms
+	•	Social placeholders: LinkedIn
+	•	Minimal footer border line
+
+7) SOLUTIONS PAGE — Structure + Copy
+
+Hero:
+“Everything you need to turn calls into booked revenue.”
+Sub: “One system. Built for your business. Maintained monthly.”
+
+Sections:
+	1.	AI Voice Agent
+
+	•	What it does: answers calls, qualifies, FAQs, routes
+	•	Features list: voice tone control, intent detection, escalation, after-hours mode
+
+	2.	Scheduling Engine
+
+	•	Book/check/cancel/reschedule
+	•	Multi-calendar, buffers, timezone, confirmations
+
+	3.	CRM + Waitlist
+
+	•	Airtable/Sheets logging, FCFS view, parent/student/lead profiles
+
+	4.	Automation Layer
+
+	•	reminders, follow-ups, missed call text-back, email sequences
+
+	5.	Reporting
+
+	•	call volume, conversion, missed leads, cancellations, recordings
+
+Include: “What we don’t do” section for trust:
+	•	“We don’t sell generic bots.”
+	•	“We don’t disappear after setup.”
+
+CTA at bottom: Book a Call
+
+8) USE CASES PAGE — Structure
+
+Hero: “Built around real business workflows.”
+Grid of industries. Each industry opens into a section with:
+
+For each (Daycare, Dental, Clinic, Salon, Home Services):
+	•	Typical caller intents
+	•	Automation flow (short bullets)
+	•	Outcomes (time saved, bookings captured, admin reduced)
+
+Add a “Custom workflows” section:
+“If your business has calls + scheduling + follow-ups, we can build it.”
+
+CTA: Get a Demo
+
+9) PROCESS PAGE — Structure
+
+Hero: “A clean rollout. No chaos.”
+Steps with details:
+	1.	Discovery
+
+	•	We map your call flow + rules
+
+	2.	Build
+
+	•	Agent + integrations + data logging
+
+	3.	Test
+
+	•	test calls, edge cases, fail-safes
+
+	4.	Launch
+
+	•	go-live + monitoring
+
+	5.	Optimize
+
+	•	monthly improvements
+
+Include “Timeline”:
+	•	Typical launch: 7–14 days (use as a placeholder; keep flexible)
+
+10) PRICING PAGE — Premium Minimal (No clutter)
+
+Hero: “Simple pricing. Real systems.”
+Three tiers:
+
+Starter — AI Receptionist
+Includes: answer + FAQs + routing + basic capture + call summary email
+
+Growth — Scheduling + CRM
+Includes: Starter + full booking + reschedule/cancel + CRM logging + reminders
+
+Premium — Full Operations System
+Includes: Growth + missed-call recovery + multi-location + dashboards + monthly optimization + priority support
+
+Add “What’s included in all plans”:
+	•	Monitoring, maintenance, secure setup, documentation
+
+Add “Book a Call” CTA under tiers.
+
+11) ABOUT PAGE — Keep it short and sharp
+
+Hero: “Built for control, not hype.”
+Story points:
+	•	We focus on operational automation (calls → data → booked outcomes)
+	•	We build systems that stay stable, monitored, and improved
+	•	We design for trust + simplicity
+
+Add “Principles” section:
+	•	Precision
+	•	Minimalism
+	•	Reliability
+	•	Measurable outcomes
+
+12) CONTACT PAGE — Simple Conversion
+
+Hero: “Tell us what you want automated.”
+Form fields:
+	•	Name
+	•	Business name
+	•	Email
+	•	Phone
+	•	What do you want the system to do? (textarea)
+Button: “Request a Call”
+
+Below form:
+	•	response expectation text (simple)
+	•	calendar embed placeholder section: “Or book directly”
+
+13) UX Details (Premium polish)
+	•	Smooth scrolling, minimal transitions
+	•	Hover: underline links, slight opacity change
+	•	Buttons: sharp corners or very subtle radius (choose one and stay consistent)
+	•	Spacing: generous vertical rhythm
+	•	Use divider lines to separate sections
+	•	Add subtle microcopy (small text) under CTAs for trust
+
+14) SEO + Metadata (Generate for each page)
+	•	Page titles with “Pilot Axis” at end
+	•	Meta descriptions (clean, no spam)
+	•	OG image suggestion: black background, white PILOT AXIS wordmark
+	•	Headings: one H1 per page, logical H2/H3 structure
+
+15) Output Requirements
+
+Deliver:
+	•	Full website structure with all pages
+	•	Exact section headings + short copy for each section
+	•	Component list (header, footer, cards, grids, FAQ accordion, forms)
+	•	Mobile responsive layout behavior
+	•	Keep everything minimalist, black/white, premium, high whitespace
+	•	No generic AI buzzword paragraphs; every line should be sharp and useful.
