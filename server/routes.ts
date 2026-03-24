@@ -169,6 +169,14 @@ export async function registerRoutes(
     try {
       const data = insertContactSchema.parse(req.body);
       const contact = await storage.createContact(data);
+
+      // Forward to Make.com webhook (non-blocking)
+      fetch("https://hook.us2.make.com/s1fgsxqskxnen153r5ub7me7eprqr9kb", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }).catch((err) => console.error("[make webhook]", err.message));
+
       res.status(201).json(contact);
     } catch (error) {
       if (error instanceof ZodError) {
@@ -204,6 +212,13 @@ export async function registerRoutes(
       sendBookingEmail({ name, email, phone, date, time }).catch((err) =>
         console.error("[mailer]", err.message)
       );
+
+      // Forward to Make.com webhook (non-blocking)
+      fetch("https://hook.us2.make.com/s1fgsxqskxnen153r5ub7me7eprqr9kb", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, date, time, type: "booking" }),
+      }).catch((err) => console.error("[make webhook]", err.message));
 
       res.json({ ok: true });
     } catch (error) {

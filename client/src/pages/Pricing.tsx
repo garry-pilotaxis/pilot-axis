@@ -35,9 +35,9 @@ export default function Pricing() {
             {/* Starter */}
             <div className="p-8 flex flex-col card-premium" style={{ background: CB, border: `1px solid ${BD}` }}>
               <h3 className="text-2xl font-bold mb-1 text-white">Starter</h3>
-              <p className="text-sm font-medium text-white/40 mb-8 pb-6" style={{ borderBottom: `1px solid ${BD}` }}>
-                AI Receptionist
-              </p>
+              <p className="text-sm font-medium text-white/40 mb-1">AI Receptionist</p>
+              <p className="text-2xl font-bold text-white mb-1">$500 <span className="text-base font-normal text-white/50">CAD/month</span></p>
+              <p className="text-xs text-white/40 mb-8 pb-6" style={{ borderBottom: `1px solid ${BD}` }}>+ as per call time usage</p>
               <ul className="space-y-4 mb-10 flex-grow">
                 {["Answer calls & qualify","Answer custom FAQs","Basic call routing","Lead capture & logging","Call summary emails"].map((f) => (
                   <li key={f} className="flex items-start text-sm text-white/65 gap-3">
@@ -72,9 +72,9 @@ export default function Pricing() {
                 Recommended
               </div>
               <h3 className="text-2xl font-bold mb-1 text-white">Growth</h3>
-              <p className="text-sm font-medium text-white/40 mb-8 pb-6" style={{ borderBottom: `1px solid ${PB}` }}>
-                Scheduling + CRM
-              </p>
+              <p className="text-sm font-medium text-white/40 mb-1">Scheduling + CRM</p>
+              <p className="text-2xl font-bold text-white mb-1">$700 <span className="text-base font-normal text-white/50">CAD/month</span></p>
+              <p className="text-xs text-white/40 mb-8 pb-6" style={{ borderBottom: `1px solid ${PB}` }}>+ as per call time usage</p>
               <ul className="space-y-4 mb-10 flex-grow">
                 {["Everything in Starter, plus:","Full booking & scheduling","Reschedule & cancel workflows","Direct CRM integration","Automated SMS/Email reminders"].map((f, i) => (
                   <li key={f} className={`flex items-start text-sm gap-3 ${i === 0 ? "font-bold text-white" : "text-white/70"}`}>
@@ -96,9 +96,9 @@ export default function Pricing() {
             {/* Premium */}
             <div className="p-8 flex flex-col card-premium" style={{ background: CB, border: `1px solid ${BD}` }}>
               <h3 className="text-2xl font-bold mb-1 text-white">Premium</h3>
-              <p className="text-sm font-medium text-white/40 mb-8 pb-6" style={{ borderBottom: `1px solid ${BD}` }}>
-                Full Operations System
-              </p>
+              <p className="text-sm font-medium text-white/40 mb-1">Full Operations System</p>
+              <p className="text-2xl font-bold text-white mb-1">$1,000 <span className="text-base font-normal text-white/50">CAD/month</span></p>
+              <p className="text-xs text-white/40 mb-8 pb-6" style={{ borderBottom: `1px solid ${BD}` }}>+ as per call time usage</p>
               <ul className="space-y-4 mb-10 flex-grow">
                 {["Everything in Growth, plus:","Missed-call recovery system","Multi-location / complex routing","Custom Operations Dashboard","Priority monthly optimization"].map((f, i) => (
                   <li key={f} className={`flex items-start text-sm gap-3 ${i === 0 ? "font-bold text-white" : "text-white/65"}`}>
@@ -117,6 +117,11 @@ export default function Pricing() {
               </Link>
             </div>
           </div>
+
+          {/* No setup fee */}
+          <p className="text-center text-sm text-white/40 mt-10">
+            No setup fee — ever.
+          </p>
 
           {/* Included in all plans */}
           <div
