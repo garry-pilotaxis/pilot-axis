@@ -1,13 +1,17 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { BookingCalendar } from "@/components/ui/booking-calendar";
 
-// ─── Contact form ────────────────────────────────────────────────────────────
+const P  = "#7269ea";
+const PL = "#9b8bf4";
+const PD = "rgba(109,92,231,0.18)";
+const PB = "rgba(109,92,231,0.28)";
+const CB = "rgba(255,255,255,0.04)";
+const BD = "rgba(255,255,255,0.08)";
+const BM = "rgba(255,255,255,0.12)";
+
 async function submitContact(data: {
   name: string; business?: string; email: string; phone?: string; message: string;
 }) {
@@ -20,8 +24,44 @@ async function submitContact(data: {
   return res.json();
 }
 
+// Shared styled input component for dark theme
+function DarkInput({ id, name, type = "text", required, placeholder, ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <input
+      id={id}
+      name={name}
+      type={type}
+      required={required}
+      placeholder={placeholder}
+      {...props}
+      className="w-full h-11 px-3 text-sm text-white placeholder:text-white/30 outline-none transition-all duration-200"
+      style={{
+        background: "rgba(255,255,255,0.04)",
+        border: `1px solid ${BD}`,
+        color: "#fff",
+      }}
+      onFocus={(e) => { e.currentTarget.style.borderColor = PB; e.currentTarget.style.boxShadow = `0 0 0 1px ${PB}, 0 0 16px rgba(109,92,231,0.15)`; }}
+      onBlur={(e)  => { e.currentTarget.style.borderColor = BD; e.currentTarget.style.boxShadow = "none"; }}
+    />
+  );
+}
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+function DarkTextarea({ id, name, required, placeholder }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  return (
+    <textarea
+      id={id}
+      name={name}
+      required={required}
+      placeholder={placeholder}
+      rows={5}
+      className="w-full px-3 py-2.5 text-sm text-white placeholder:text-white/30 outline-none resize-none transition-all duration-200"
+      style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${BD}`, color: "#fff" }}
+      onFocus={(e) => { e.currentTarget.style.borderColor = PB; e.currentTarget.style.boxShadow = `0 0 0 1px ${PB}, 0 0 16px rgba(109,92,231,0.15)`; }}
+      onBlur={(e)  => { e.currentTarget.style.borderColor = BD; e.currentTarget.style.boxShadow = "none"; }}
+    />
+  );
+}
+
 export default function Contact() {
   const { toast } = useToast();
 
@@ -48,17 +88,18 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* hero */}
-      <section className="pt-24 pb-12 px-4 border-b border-black/10 bg-[#fcfcfc]">
+    <div className="flex flex-col min-h-screen text-white">
+
+      {/* Hero */}
+      <section className="pt-28 pb-16 px-4" style={{ borderBottom: `1px solid ${BD}` }}>
         <div className="container mx-auto max-w-4xl text-center">
-          <p className="text-[11px] uppercase tracking-widest font-bold text-black/35 mb-4">
+          <p className="text-[11px] uppercase tracking-widest font-bold text-white/30 mb-4">
             Get Started
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4 text-white">
             Book a discovery call.
           </h1>
-          <p className="text-black/55 max-w-md mx-auto text-sm leading-relaxed">
+          <p className="text-white/50 max-w-md mx-auto text-sm leading-relaxed">
             30 minutes. We'll map your call flow and show you exactly what we'd build.
           </p>
         </div>
@@ -68,59 +109,65 @@ export default function Contact() {
         <div className="container mx-auto max-w-5xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
 
-            {/* ── Left: contact form ──────────────────────────────────── */}
+            {/* Contact form */}
             <div>
-              <p className="text-[10px] uppercase tracking-widest font-bold text-black/35 mb-6">
+              <p className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-6">
                 Or send a message
               </p>
-              <form id="contact-form" className="space-y-5" onSubmit={handleSubmit}>
+              <form id="contact-form" className="space-y-4" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <Label htmlFor="name" className="text-[10px] uppercase tracking-widest font-bold text-black/45">Name</Label>
-                    <Input id="name" name="name" required placeholder="Jane Smith"
-                      className="rounded-none border-black/20 focus-visible:ring-1 focus-visible:ring-black h-11" />
+                    <label htmlFor="name" className="text-[10px] uppercase tracking-widest font-bold text-white/35 block">Name</label>
+                    <DarkInput id="name" name="name" required placeholder="Jane Smith" />
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="business" className="text-[10px] uppercase tracking-widest font-bold text-black/45">Business</Label>
-                    <Input id="business" name="business" placeholder="Acme Clinic"
-                      className="rounded-none border-black/20 focus-visible:ring-1 focus-visible:ring-black h-11" />
+                    <label htmlFor="business" className="text-[10px] uppercase tracking-widest font-bold text-white/35 block">Business</label>
+                    <DarkInput id="business" name="business" placeholder="Acme Clinic" />
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <Label htmlFor="email" className="text-[10px] uppercase tracking-widest font-bold text-black/45">Email</Label>
-                    <Input id="email" name="email" type="email" required placeholder="jane@example.com"
-                      className="rounded-none border-black/20 focus-visible:ring-1 focus-visible:ring-black h-11" />
+                    <label htmlFor="email" className="text-[10px] uppercase tracking-widest font-bold text-white/35 block">Email</label>
+                    <DarkInput id="email" name="email" type="email" required placeholder="jane@example.com" />
                   </div>
                   <div className="space-y-1.5">
-                    <Label htmlFor="phone" className="text-[10px] uppercase tracking-widest font-bold text-black/45">Phone</Label>
-                    <Input id="phone" name="phone" type="tel" placeholder="(555) 000-0000"
-                      className="rounded-none border-black/20 focus-visible:ring-1 focus-visible:ring-black h-11" />
+                    <label htmlFor="phone" className="text-[10px] uppercase tracking-widest font-bold text-white/35 block">Phone</label>
+                    <DarkInput id="phone" name="phone" type="tel" placeholder="(555) 000-0000" />
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="message" className="text-[10px] uppercase tracking-widest font-bold text-black/45">
+                  <label htmlFor="message" className="text-[10px] uppercase tracking-widest font-bold text-white/35 block">
                     What do you need automated?
-                  </Label>
-                  <Textarea id="message" name="message" required
-                    className="rounded-none border-black/20 focus-visible:ring-1 focus-visible:ring-black min-h-[120px] resize-none"
-                    placeholder="We get ~50 missed calls/week and need them routed to our waitlist..." />
+                  </label>
+                  <DarkTextarea id="message" name="message" required placeholder="We get ~50 missed calls/week and need them routed to our waitlist..." />
                 </div>
-                <Button type="submit" disabled={mutation.isPending}
-                  className="w-full rounded-none bg-black text-white h-12 text-sm font-medium">
+                <Button
+                  type="submit"
+                  disabled={mutation.isPending}
+                  className="w-full rounded-none text-white h-12 text-sm font-medium border-0 btn-glow btn-sweep"
+                  style={{ background: `linear-gradient(135deg, ${P}, ${PL})` }}
+                >
                   {mutation.isPending
                     ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Submitting...</>
                     : "Send Message"}
                 </Button>
-                <p className="text-[11px] text-center text-black/40">
+                <p className="text-[11px] text-center text-white/30">
                   We respond within 24 hours.
                 </p>
               </form>
             </div>
 
-            {/* ── Right: premium calendar ──────────────────────────────── */}
-            <div className="border border-black/10 bg-white shadow-sm" style={{ minHeight: 520 }}>
-              <BookingCalendar />
+            {/* Calendar */}
+            <div
+              style={{
+                border: `1px solid ${PB}`,
+                background: "rgba(109,92,231,0.05)",
+                backdropFilter: "blur(12px)",
+                minHeight: 520,
+                boxShadow: `0 0 40px rgba(109,92,231,0.12)`,
+              }}
+            >
+              <BookingCalendar dark />
             </div>
 
           </div>

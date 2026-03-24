@@ -1,56 +1,76 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 
+const P  = "#7269ea";
+const PL = "#9b8bf4";
+const PD = "rgba(109,92,231,0.18)";
+const PB = "rgba(109,92,231,0.28)";
+const CB = "rgba(255,255,255,0.04)";
+const BD = "rgba(255,255,255,0.08)";
+
+const principles = [
+  { title: "Precision",           body: "Exact routing, deterministic scheduling rules, and flawless data logging. It works as intended." },
+  { title: "Minimalism",          body: "No unnecessary features. We strip away the noise to build exactly what drives revenue and saves time." },
+  { title: "Reliability",         body: "Fail-safes, fallbacks, and human escalations. Systems built to handle edge cases without breaking." },
+  { title: "Measurable Outcomes", body: "If it doesn't increase booked appointments or dramatically reduce admin hours, we don't build it." },
+];
+
 export default function About() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <section className="pt-24 pb-16 px-4">
+    <div className="flex flex-col min-h-screen text-white">
+
+      {/* Hero */}
+      <section className="pt-28 pb-20 px-4" style={{ borderBottom: `1px solid ${BD}` }}>
         <div className="container mx-auto max-w-3xl text-center">
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">
+          <p className="text-[10px] uppercase tracking-widest text-white/35 mb-4">About</p>
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6 text-white">
             Built for control, not hype.
           </h1>
         </div>
       </section>
 
-      <section className="py-16 px-4">
+      {/* Body */}
+      <section className="py-20 px-4">
         <div className="container mx-auto max-w-3xl">
-          <div className="prose prose-lg text-black/80 max-w-none mb-24">
-            <p className="text-xl leading-relaxed mb-8 font-medium text-black">
+
+          {/* Prose */}
+          <div className="mb-24 space-y-6">
+            <p className="text-xl leading-relaxed font-medium text-white">
               We focus on operational automation: turning calls into structured data, and structured data into booked outcomes.
             </p>
-            <p className="mb-6 leading-relaxed">
+            <p className="leading-relaxed text-white/60">
               Pilot Axis was founded on a simple premise: appointment-based businesses lose too much revenue to missed calls and chaotic manual scheduling. While the market flooded with gimmicky AI chatbots, we built rigorous, reliable systems.
             </p>
-            <p className="leading-relaxed">
+            <p className="leading-relaxed text-white/60">
               We design for trust and simplicity. We build systems that stay stable, are monitored constantly, and improve monthly. No bloated software. Just precise engineering that handles your frontline operations.
             </p>
           </div>
 
-          <div className="border-t border-black/10 pt-16">
-            <h2 className="text-2xl font-bold mb-10 text-center">Our Principles</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              <div className="border border-black/10 p-8 bg-[#fcfcfc]">
-                <h3 className="font-bold text-lg mb-2">Precision</h3>
-                <p className="text-sm text-black/60 leading-relaxed">Exact routing, deterministic scheduling rules, and flawless data logging. It works as intended.</p>
-              </div>
-              <div className="border border-black/10 p-8 bg-[#fcfcfc]">
-                <h3 className="font-bold text-lg mb-2">Minimalism</h3>
-                <p className="text-sm text-black/60 leading-relaxed">No unnecessary features. We strip away the noise to build exactly what drives revenue and saves time.</p>
-              </div>
-              <div className="border border-black/10 p-8 bg-[#fcfcfc]">
-                <h3 className="font-bold text-lg mb-2">Reliability</h3>
-                <p className="text-sm text-black/60 leading-relaxed">Fail-safes, fallbacks, and human escalations. Systems built to handle edge cases without breaking.</p>
-              </div>
-              <div className="border border-black/10 p-8 bg-[#fcfcfc]">
-                <h3 className="font-bold text-lg mb-2">Measurable Outcomes</h3>
-                <p className="text-sm text-black/60 leading-relaxed">If it doesn't increase booked appointments or dramatically reduce admin hours, we don't build it.</p>
-              </div>
+          {/* Principles */}
+          <div style={{ borderTop: `1px solid ${BD}` }} className="pt-16">
+            <h2 className="text-2xl font-bold mb-10 text-center text-white">Our Principles</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {principles.map(({ title, body }) => (
+                <div
+                  key={title}
+                  className="p-8 card-premium"
+                  style={{ background: CB, border: `1px solid ${BD}` }}
+                >
+                  <div className="w-6 h-px mb-4" style={{ background: PB }} />
+                  <h3 className="font-bold text-lg mb-3 text-white">{title}</h3>
+                  <p className="text-sm text-white/50 leading-relaxed">{body}</p>
+                </div>
+              ))}
             </div>
           </div>
-          
+
+          {/* CTA */}
           <div className="mt-24 text-center">
             <Link href="/contact">
-              <Button className="rounded-none bg-black text-white px-10 h-12 hover-lift">
+              <Button
+                className="rounded-none text-white px-10 h-12 border-0 btn-glow btn-sweep"
+                style={{ background: `linear-gradient(135deg, ${P}, ${PL})` }}
+              >
                 Work With Us
               </Button>
             </Link>

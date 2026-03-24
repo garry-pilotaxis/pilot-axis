@@ -253,4 +253,43 @@ body.cursor-dark .cursor-bracket span { border-color: rgba(0,0,0,0.7); }
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  /* ── Button glow — glowing halo on purple buttons ── */
+  .btn-glow {
+    position: relative;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  .btn-glow:hover {
+    box-shadow:
+      0 0 18px rgba(109, 92, 231, 0.55),
+      0 0 40px rgba(109, 92, 231, 0.25),
+      0 0 80px rgba(109, 92, 231, 0.10);
+    transform: translateY(-1px);
+  }
+
+  /* ── Outline button glow — white glimmer ── */
+  .btn-glow-outline {
+    position: relative;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  .btn-glow-outline:hover {
+    box-shadow:
+      0 0 14px rgba(255, 255, 255, 0.15),
+      0 0 30px rgba(255, 255, 255, 0.07);
+    transform: translateY(-1px);
+  }
+
+  /* ── Icon glow wrapper ── */
+  .icon-glow {
+    transition: filter 0.3s ease, transform 0.2s ease;
+  }
+  .icon-glow:hover {
+    filter: drop-shadow(0 0 8px rgba(109, 92, 231, 0.8)) drop-shadow(0 0 16px rgba(109, 92, 231, 0.4));
+    transform: scale(1.08);
+  }
+
+  /* ── Glowing border ring on cards/inputs on focus ── */
+  .ring-glow:focus-within {
+    box-shadow: 0 0 0 1px rgba(109,92,231,0.6), 0 0 20px rgba(109,92,231,0.2);
+  }
 }
