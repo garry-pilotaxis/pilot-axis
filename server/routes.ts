@@ -31,6 +31,8 @@ async function sendBookingEmail(data: {
     console.warn("[mailer] SMTP_USER / SMTP_PASS not set — skipping email");
     return;
   }
+
+  // ── 1. Admin notification ────────────────────────────────────────────────
   await mailer.sendMail({
     from:    `"Pilot Axis" <${process.env.SMTP_USER}>`,
     to:      "admin@pilotaxis.ca",
@@ -60,6 +62,38 @@ async function sendBookingEmail(data: {
         </div>
       </div>`,
     replyTo: data.email,
+  });
+
+  // ── 2. Confirmation to the person who booked ─────────────────────────────
+  await mailer.sendMail({
+    from:    `"Pilot Axis" <${process.env.SMTP_USER}>`,
+    to:      data.email,
+    subject: `You're booked — ${data.date} at ${data.time}`,
+    html: `
+      <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#111">
+        <div style="background:#000;padding:24px 32px">
+          <span style="color:#fff;font-weight:700;font-size:18px;letter-spacing:2px">PILOT AXIS</span>
+        </div>
+        <div style="padding:32px;border:1px solid #e5e5e5;border-top:none">
+          <h2 style="margin:0 0 8px;font-size:22px">Your call is confirmed.</h2>
+          <p style="color:#666;font-size:14px;margin:0 0 28px">
+            We're looking forward to speaking with you, ${data.name.split(" ")[0]}.
+          </p>
+          <div style="background:#f8f8f8;padding:20px 24px;border-left:3px solid #000;margin-bottom:28px">
+            <p style="margin:0 0 6px;font-size:13px;color:#999;text-transform:uppercase;letter-spacing:1px">Your appointment</p>
+            <p style="margin:0;font-size:18px;font-weight:700">${data.date}</p>
+            <p style="margin:4px 0 0;font-size:15px;color:#444">${data.time} Eastern Time · 20 minutes</p>
+          </div>
+          <p style="font-size:13px;color:#666;line-height:1.6;margin:0 0 24px">
+            We'll send a calendar invite shortly. In the meantime, if you need to reschedule
+            or have any questions, reply to this email.
+          </p>
+          <div style="border-top:1px solid #f0f0f0;padding-top:20px;font-size:12px;color:#999">
+            Pilot Axis · AI Voice &amp; Workflow Automation · pilotaxis.ca
+          </div>
+        </div>
+      </div>`,
+    replyTo: "admin@pilotaxis.ca",
   });
 }
 
