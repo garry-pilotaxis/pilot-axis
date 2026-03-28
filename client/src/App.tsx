@@ -5,7 +5,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { CustomCursor } from "@/components/ui/custom-cursor";
 import { ChatWidget } from "@/components/ui/chat-widget";
 import { MeshBlobs } from "@/components/ui/mesh-blobs";
 import { RobotCharacter } from "@/components/ui/robot-character";
@@ -22,19 +21,19 @@ import Privacy from "@/pages/Privacy";
 import Terms from "@/pages/Terms";
 import NotFound from "@/pages/not-found";
 
-/** Fixed full-screen background: dark base + purple glow + grid lines */
+/** Fixed full-screen background: white base + subtle purple glow + light grid lines */
 function Background() {
   return (
     <div className="fixed inset-0 pointer-events-none select-none" style={{ zIndex: -2 }}>
-      {/* 1 — deep navy base */}
-      <div className="absolute inset-0" style={{ background: "#06060f" }} />
+      {/* 1 — white base */}
+      <div className="absolute inset-0" style={{ background: "#ffffff" }} />
 
-      {/* 2 — purple/indigo radial glow — top-right */}
+      {/* 2 — subtle purple/indigo radial glow — top-right */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 65% 55% at 82% 0%, rgba(99,83,235,0.26) 0%, transparent 68%)",
+            "radial-gradient(ellipse 65% 55% at 82% 0%, rgba(99,83,235,0.08) 0%, transparent 68%)",
         }}
       />
 
@@ -43,16 +42,16 @@ function Background() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 45% 40% at 10% 100%, rgba(80,60,200,0.10) 0%, transparent 70%)",
+            "radial-gradient(ellipse 45% 40% at 10% 100%, rgba(80,60,200,0.05) 0%, transparent 70%)",
         }}
       />
 
-      {/* 4 — grid lines */}
+      {/* 4 — grid lines (dark on white) */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.038) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.038) 1px, transparent 1px)",
+            "linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)",
           backgroundSize: "58px 58px",
         }}
       />
@@ -66,8 +65,7 @@ function Router() {
       <Background />
       <MeshBlobs />
       <RobotCharacter />
-      <CustomCursor />
-      <Navbar />
+<Navbar />
       <main className="flex-grow">
         <Switch>
           <Route path="/" component={Home} />

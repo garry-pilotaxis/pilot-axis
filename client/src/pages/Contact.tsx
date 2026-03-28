@@ -8,9 +8,9 @@ const P  = "#7269ea";
 const PL = "#9b8bf4";
 const PD = "rgba(109,92,231,0.18)";
 const PB = "rgba(109,92,231,0.28)";
-const CB = "rgba(255,255,255,0.04)";
-const BD = "rgba(255,255,255,0.08)";
-const BM = "rgba(255,255,255,0.12)";
+const CB = "rgba(0,0,0,0.03)";
+const BD = "rgba(0,0,0,0.08)";
+const BM = "rgba(0,0,0,0.12)";
 
 async function submitContact(data: {
   name: string; business?: string; email: string; phone?: string; message: string;
@@ -34,11 +34,11 @@ function DarkInput({ id, name, type = "text", required, placeholder, ...props }:
       required={required}
       placeholder={placeholder}
       {...props}
-      className="w-full h-11 px-3 text-sm text-white placeholder:text-white/30 outline-none transition-all duration-200"
+      className="w-full h-11 px-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition-all duration-200"
       style={{
-        background: "rgba(255,255,255,0.04)",
+        background: "rgba(0,0,0,0.03)",
         border: `1px solid ${BD}`,
-        color: "#fff",
+        color: "#111",
       }}
       onFocus={(e) => { e.currentTarget.style.borderColor = PB; e.currentTarget.style.boxShadow = `0 0 0 1px ${PB}, 0 0 16px rgba(109,92,231,0.15)`; }}
       onBlur={(e)  => { e.currentTarget.style.borderColor = BD; e.currentTarget.style.boxShadow = "none"; }}
@@ -54,8 +54,8 @@ function DarkTextarea({ id, name, required, placeholder }: React.TextareaHTMLAtt
       required={required}
       placeholder={placeholder}
       rows={5}
-      className="w-full px-3 py-2.5 text-sm text-white placeholder:text-white/30 outline-none resize-none transition-all duration-200"
-      style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${BD}`, color: "#fff" }}
+      className="w-full px-3 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 outline-none resize-none transition-all duration-200"
+      style={{ background: "rgba(0,0,0,0.03)", border: `1px solid ${BD}`, color: "#111" }}
       onFocus={(e) => { e.currentTarget.style.borderColor = PB; e.currentTarget.style.boxShadow = `0 0 0 1px ${PB}, 0 0 16px rgba(109,92,231,0.15)`; }}
       onBlur={(e)  => { e.currentTarget.style.borderColor = BD; e.currentTarget.style.boxShadow = "none"; }}
     />
@@ -88,18 +88,18 @@ export default function Contact() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen text-white">
+    <div className="flex flex-col min-h-screen text-gray-900">
 
       {/* Hero */}
       <section className="pt-28 pb-16 px-4" style={{ borderBottom: `1px solid ${BD}` }}>
         <div className="container mx-auto max-w-4xl text-center">
-          <p className="text-[11px] uppercase tracking-widest font-bold text-white/30 mb-4">
+          <p className="text-[11px] uppercase tracking-widest font-bold text-gray-400 mb-4">
             Get Started
           </p>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4 text-white">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4 text-gray-900">
             Book a discovery call.
           </h1>
-          <p className="text-white/50 max-w-md mx-auto text-sm leading-relaxed">
+          <p className="text-gray-500 max-w-md mx-auto text-sm leading-relaxed">
             30 minutes. We'll map your call flow and show you exactly what we'd build.
           </p>
         </div>
@@ -111,32 +111,32 @@ export default function Contact() {
 
             {/* Contact form */}
             <div>
-              <p className="text-[10px] uppercase tracking-widest font-bold text-white/30 mb-6">
+              <p className="text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-6">
                 Or send a message
               </p>
               <form id="contact-form" className="space-y-4" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label htmlFor="name" className="text-[10px] uppercase tracking-widest font-bold text-white/35 block">Name</label>
+                    <label htmlFor="name" className="text-[10px] uppercase tracking-widest font-bold text-gray-400 block">Name</label>
                     <DarkInput id="name" name="name" required placeholder="Jane Smith" />
                   </div>
                   <div className="space-y-1.5">
-                    <label htmlFor="business" className="text-[10px] uppercase tracking-widest font-bold text-white/35 block">Business</label>
+                    <label htmlFor="business" className="text-[10px] uppercase tracking-widest font-bold text-gray-400 block">Business</label>
                     <DarkInput id="business" name="business" placeholder="Acme Clinic" />
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label htmlFor="email" className="text-[10px] uppercase tracking-widest font-bold text-white/35 block">Email</label>
+                    <label htmlFor="email" className="text-[10px] uppercase tracking-widest font-bold text-gray-400 block">Email</label>
                     <DarkInput id="email" name="email" type="email" required placeholder="jane@example.com" />
                   </div>
                   <div className="space-y-1.5">
-                    <label htmlFor="phone" className="text-[10px] uppercase tracking-widest font-bold text-white/35 block">Phone</label>
+                    <label htmlFor="phone" className="text-[10px] uppercase tracking-widest font-bold text-gray-400 block">Phone</label>
                     <DarkInput id="phone" name="phone" type="tel" placeholder="(555) 000-0000" />
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <label htmlFor="message" className="text-[10px] uppercase tracking-widest font-bold text-white/35 block">
+                  <label htmlFor="message" className="text-[10px] uppercase tracking-widest font-bold text-gray-400 block">
                     What do you need automated?
                   </label>
                   <DarkTextarea id="message" name="message" required placeholder="We get ~50 missed calls/week and need them routed to our waitlist..." />
@@ -151,7 +151,7 @@ export default function Contact() {
                     ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Submitting...</>
                     : "Send Message"}
                 </Button>
-                <p className="text-[11px] text-center text-white/30">
+                <p className="text-[11px] text-center text-gray-400">
                   We respond within 24 hours.
                 </p>
               </form>
@@ -167,7 +167,7 @@ export default function Contact() {
                 boxShadow: `0 0 40px rgba(109,92,231,0.12)`,
               }}
             >
-              <BookingCalendar dark />
+              <BookingCalendar />
             </div>
 
           </div>

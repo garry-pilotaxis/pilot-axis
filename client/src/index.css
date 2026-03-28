@@ -35,25 +35,25 @@
   --font-heading: var(--font-heading);
 }
 
-/* ─── Dark theme colour tokens ───────────────────────────────────────────── */
+/* ─── Light theme colour tokens ───────────────────────────────────────────── */
 :root {
-  --background:    243 75% 3%;          /* #06060f  deep navy-black   */
-  --foreground:    0   0%  98%;         /* #fafafa  near-white        */
+  --background:    0 0% 100%;           /* #ffffff  white             */
+  --foreground:    243 40% 8%;          /* dark navy                  */
 
-  --card:          243 60% 5%;          /* #0a0a18  elevated card     */
-  --card-foreground: 0 0% 98%;
+  --card:          0 0% 97%;            /* light card                 */
+  --card-foreground: 243 40% 8%;
 
-  --popover:       243 60% 5%;
-  --popover-foreground: 0 0% 98%;
+  --popover:       0 0% 97%;
+  --popover-foreground: 243 40% 8%;
 
   --primary:       249 80% 65%;         /* #7269ea  purple            */
   --primary-foreground: 0 0% 100%;
 
-  --secondary:     243 40% 9%;          /* #0f0f22  slightly lighter  */
-  --secondary-foreground: 0 0% 85%;
+  --secondary:     0 0% 95%;            /* light secondary            */
+  --secondary-foreground: 243 40% 8%;
 
-  --muted:         243 40% 9%;
-  --muted-foreground: 243 15% 55%;      /* muted gray                 */
+  --muted:         0 0% 95%;
+  --muted-foreground: 0 0% 45%;         /* medium gray                */
 
   --accent:        249 80% 65%;
   --accent-foreground: 0 0% 100%;
@@ -61,8 +61,8 @@
   --destructive:   0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  --border:        0 0% 16%;            /* #292929 — subtle dark line */
-  --input:         0 0% 16%;
+  --border:        0 0% 88%;            /* light border               */
+  --input:         0 0% 88%;
   --ring:          249 80% 65%;
 
   /* brand extras */
@@ -96,22 +96,20 @@ body::after {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    /* dark base so no white flash on overscroll */
-    background: #06060f;
+    background: #ffffff;
   }
 
   body {
     @apply font-sans antialiased text-foreground selection:bg-[#7269ea] selection:text-white;
-    cursor: none;
-    background: #06060f;
+    background: #ffffff;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading tracking-tight text-balance;
   }
 
-  a, button, [role="button"], input, textarea, select, label {
-    cursor: none;
+  a, button, [role="button"] {
+    cursor: pointer;
   }
 }
 
@@ -121,7 +119,7 @@ body::after {
   position: fixed;
   top: 0; left: 0;
   width: 3px; height: 3px;
-  background: #fff;              /* white by default — dark site   */
+  background: #000;              /* black by default — light site  */
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
@@ -143,7 +141,7 @@ body::after {
 .cursor-bracket span {
   position: absolute;
   width: 8px; height: 8px;
-  border-color: rgba(255,255,255,0.7);
+  border-color: rgba(0,0,0,0.5);
   border-style: solid;
   transition: border-color 0.2s ease;
 }
@@ -157,9 +155,9 @@ body::after {
 body.cursor-hover .cursor-bracket { width: 18px; height: 18px; }
 body.cursor-hover .cursor-dot     { opacity: 0; }
 
-/* when over a LIGHT element — flip to dark */
-body.cursor-dark .cursor-dot { background: #000; }
-body.cursor-dark .cursor-bracket span { border-color: rgba(0,0,0,0.7); }
+/* when over a DARK element — flip to light */
+body.cursor-dark .cursor-dot { background: #fff; }
+body.cursor-dark .cursor-bracket span { border-color: rgba(255,255,255,0.7); }
 
 /* ─── Button sweep micro-interaction ────────────────────────────────────── */
 .btn-sweep {
@@ -216,9 +214,9 @@ body.cursor-dark .cursor-bracket span { border-color: rgba(0,0,0,0.7); }
     @apply transition-transform duration-300 ease-out hover:-translate-y-1;
   }
 
-  /* underline link — white for dark theme */
+  /* underline link */
   .minimal-link {
-    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-white after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100;
+    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-gray-900 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100;
   }
 
   /* card hover — purple glow on dark theme */
@@ -233,16 +231,16 @@ body.cursor-dark .cursor-bracket span { border-color: rgba(0,0,0,0.7); }
     border-color: rgba(109, 92, 231, 0.3);
   }
 
-  /* subtle white dot grid */
+  /* subtle dot grid */
   .dot-grid {
-    background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
-  /* fade rule — white for dark theme */
+  /* fade rule */
   .hr-fade {
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.12), transparent);
+    background: linear-gradient(to right, transparent, rgba(0,0,0,0.12), transparent);
     border: none;
   }
 
@@ -267,15 +265,15 @@ body.cursor-dark .cursor-bracket span { border-color: rgba(0,0,0,0.7); }
     transform: translateY(-1px);
   }
 
-  /* ── Outline button glow — white glimmer ── */
+  /* ── Outline button glow ── */
   .btn-glow-outline {
     position: relative;
     transition: box-shadow 0.3s ease, transform 0.2s ease;
   }
   .btn-glow-outline:hover {
     box-shadow:
-      0 0 14px rgba(255, 255, 255, 0.15),
-      0 0 30px rgba(255, 255, 255, 0.07);
+      0 0 14px rgba(0, 0, 0, 0.12),
+      0 0 30px rgba(0, 0, 0, 0.06);
     transform: translateY(-1px);
   }
 

@@ -6,8 +6,8 @@ const P  = "#7269ea";
 const PL = "#9b8bf4";
 const PD = "rgba(109,92,231,0.18)";
 const PB = "rgba(109,92,231,0.28)";
-const CB = "rgba(255,255,255,0.04)";
-const BD = "rgba(255,255,255,0.08)";
+const CB = "rgba(0,0,0,0.03)";
+const BD = "rgba(0,0,0,0.08)";
 
 export default function UseCases() {
   const industries = [
@@ -44,16 +44,16 @@ export default function UseCases() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen text-white">
+    <div className="flex flex-col min-h-screen text-gray-900">
 
       {/* Hero */}
       <section className="pt-28 pb-20 px-4" style={{ borderBottom: `1px solid ${BD}` }}>
         <div className="container mx-auto max-w-4xl text-center">
-          <p className="text-[10px] uppercase tracking-widest text-white/35 mb-4">Use Cases</p>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight mb-6 text-white">
+          <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-4">Use Cases</p>
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight mb-6 text-gray-900">
             Built around real business workflows.
           </h1>
-          <p className="text-lg text-white/55 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
             See how the system adapts to different industries to capture leads and eliminate admin.
           </p>
         </div>
@@ -71,12 +71,12 @@ export default function UseCases() {
               >
                 {/* Left: title + intents */}
                 <div className="md:w-1/3 pb-8 md:pb-0 md:pr-8" style={{ borderBottom: `1px solid ${BD}`, ...(window.innerWidth >= 768 ? { borderBottom: "none", borderRight: `1px solid ${BD}` } : {}) }}>
-                  <h2 className="text-2xl font-bold mb-4 text-white">{industry.title}</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-gray-900">{industry.title}</h2>
                   <div className="mb-6">
-                    <p className="text-xs font-bold uppercase tracking-wider text-white/35 mb-3">Typical Intents</p>
+                    <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Typical Intents</p>
                     <ul className="space-y-2">
                       {industry.intents.map((intent, j) => (
-                        <li key={j} className="text-sm text-white/65 flex items-center gap-2">
+                        <li key={j} className="text-sm text-gray-600 flex items-center gap-2">
                           <span className="w-1 h-1 rounded-full shrink-0" style={{ background: PL }} />
                           {intent}
                         </li>
@@ -88,13 +88,13 @@ export default function UseCases() {
                 {/* Right: flows + outcome */}
                 <div className="md:w-2/3 flex flex-col justify-between">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-white/35 mb-3">Automation Flow</p>
+                    <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3">Automation Flow</p>
                     <div className="flex flex-wrap gap-2 mb-8">
                       {industry.flows.map((flow, j) => (
                         <span
                           key={j}
-                          className="px-3 py-1.5 text-xs font-medium text-white/65"
-                          style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${BD}` }}
+                          className="px-3 py-1.5 text-xs font-medium text-gray-600"
+                          style={{ background: "rgba(0,0,0,0.04)", border: `1px solid ${BD}` }}
                         >
                           {flow}
                         </span>
@@ -103,7 +103,7 @@ export default function UseCases() {
                   </div>
                   <div className="p-6" style={{ background: PD, border: `1px solid ${PB}` }}>
                     <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: PL }}>The Outcome</p>
-                    <p className="text-sm leading-relaxed text-white/80">{industry.outcomes}</p>
+                    <p className="text-sm leading-relaxed text-gray-700">{industry.outcomes}</p>
                   </div>
                 </div>
               </div>
@@ -112,8 +112,8 @@ export default function UseCases() {
 
           {/* Custom workflows CTA */}
           <div className="mt-16 p-12 text-center" style={{ border: `1px solid ${PB}`, background: PD }}>
-            <h3 className="text-2xl font-bold mb-4 text-white">Custom Workflows</h3>
-            <p className="text-white/55 mb-8 max-w-xl mx-auto">
+            <h3 className="text-2xl font-bold mb-4 text-gray-900">Custom Workflows</h3>
+            <p className="text-gray-500 mb-8 max-w-xl mx-auto">
               If your business has calls, scheduling, and follow-ups, we can build it. We engineer systems to map perfectly to your unique rules.
             </p>
             <Link href="/contact">

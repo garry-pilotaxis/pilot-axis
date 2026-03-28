@@ -297,13 +297,10 @@ function RobotSVG({ phase, laughing, pointing }: { phase: Phase; laughing: boole
 
 // ── main component ─────────────────────────────────────────────────────────────
 export function RobotCharacter() {
-  const [phase, setPhase]       = useState<Phase>("falling");
-  const [showHi, setShowHi]     = useState(false);
   const [jokeIdx, setJokeIdx]   = useState(0);
   const [showJoke, setShowJoke] = useState(false);
   const [laughing, setLaughing] = useState(false);
   const [pointing, setPointing] = useState(false);
-  const dims = useRef({ w: typeof window !== "undefined" ? window.innerWidth : 1200, h: typeof window !== "undefined" ? window.innerHeight : 800 });
 
   const triggerLaugh = () => {
     setLaughing(true);
@@ -314,28 +311,18 @@ export function RobotCharacter() {
     setJokeIdx(idx);
     setShowJoke(true);
     setPointing(true);
-    // brief pause then EXPLODE laughing
-    setTimeout(() => {
-      triggerLaugh();
-    }, 600);
+    setTimeout(() => { triggerLaugh(); }, 600);
   };
 
   useEffect(() => {
-    dims.current = { w: window.innerWidth, h: window.innerHeight };
-
-    // sequence: heavy fall → wave hi → spring to left corner → jokes + insane laughing
-    const t1 = setTimeout(() => { setPhase("waving"); setShowHi(true); },  1200);
-    const t2 = setTimeout(() => { setShowHi(false); },                     3500);
-    const t3 = setTimeout(() => { setPhase("resting"); },                  3900);
-    const t4 = setTimeout(() => { showNewJoke(0); },                       5000);
-
-    return () => [t1, t2, t3, t4].forEach(clearTimeout);
+    // show first joke after 3s, then cycle every 25s
+    const t1 = setTimeout(() => { showNewJoke(0); }, 3000);
+    return () => clearTimeout(t1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // cycle jokes every 25 s while resting
   useEffect(() => {
-    if (phase !== "resting" || !showJoke) return;
+    if (!showJoke) return;
     const id = setInterval(() => {
       setJokeIdx(prev => {
         const next = getNextJoke(prev);
@@ -345,67 +332,36 @@ export function RobotCharacter() {
     }, 25000);
     return () => clearInterval(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, showJoke]);
-
-  const { w, h } = dims.current;
-  const landX = w / 2 - 34;   // centre of screen on landing
-  const landY = h * 0.37;
-
-  // REST: bottom-LEFT corner
-  const restX = 58;
-  const restY = h - 148;
+  }, [showJoke]);
 
   return (
     <>
-      {/* ── static joke bubble (fixed, independent of robot) ── */}
+      {/* joke bubble */}
       <AnimatePresence mode="wait">
-        {phase === "resting" && showJoke && (
-          <JokeBubble key={jokeIdx} text={JOKES[jokeIdx]} />
-        )}
+        {showJoke && <JokeBubble key={jokeIdx} text={JOKES[jokeIdx]} />}
       </AnimatePresence>
 
-      {/* ── robot ── */}
-      <motion.div
+      {/* robot — fixed permanently at bottom-left */}
+      <div
         className="pointer-events-none select-none"
-        style={{ position: "fixed", left: 0, top: 0, zIndex: 9000 }}
-        initial={{ x: landX, y: -240 }}
-        animate={
-          phase === "falling" || phase === "waving"
-            ? { x: landX, y: landY }
-            : { x: restX, y: restY }
-        }
-        transition={
-          phase === "falling"
-            ? { type: "spring", damping: 5, stiffness: 200, mass: 3.2 }   // heavy thud
-            : phase === "waving"
-            ? {}
-            : { type: "spring", damping: 14, stiffness: 65 }              // slide to corner
-        }
+        style={{ position: "fixed", left: 20, bottom: 20, zIndex: 9000 }}
       >
-        {/* whole-body shake when laughing, gentle float when calm */}
         <motion.div
           animate={
             laughing
               ? { rotate: [-7, 7], x: [-3, 3] }
-              : phase === "resting"
-              ? { y: [0, -5, 0] }
-              : {}
+              : { y: [0, -5, 0] }
           }
           transition={
             laughing
               ? { duration: 0.09, repeat: 26, repeatType: "mirror", ease: "linear" }
               : { duration: 2.8, repeat: Infinity, ease: "easeInOut" }
           }
-          style={{ position: "relative", display: "inline-block" }}
+          style={{ display: "inline-block" }}
         >
-          <RobotSVG phase={phase} laughing={laughing} pointing={pointing && !laughing} />
-
-          {/* hi bubble stays relative to robot */}
-          <AnimatePresence>
-            {showHi && <HiBubble key="hi" />}
-          </AnimatePresence>
+          <RobotSVG phase="resting" laughing={laughing} pointing={pointing && !laughing} />
         </motion.div>
-      </motion.div>
+      </div>
     </>
   );
 }

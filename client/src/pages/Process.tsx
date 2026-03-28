@@ -5,8 +5,8 @@ const P  = "#7269ea";
 const PL = "#9b8bf4";
 const PD = "rgba(109,92,231,0.18)";
 const PB = "rgba(109,92,231,0.28)";
-const CB = "rgba(255,255,255,0.04)";
-const BD = "rgba(255,255,255,0.08)";
+const CB = "rgba(0,0,0,0.03)";
+const BD = "rgba(0,0,0,0.08)";
 
 export default function Process() {
   const steps = [
@@ -18,16 +18,16 @@ export default function Process() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen text-white">
+    <div className="flex flex-col min-h-screen text-gray-900">
 
       {/* Hero */}
       <section className="pt-28 pb-20 px-4" style={{ borderBottom: `1px solid ${BD}` }}>
         <div className="container mx-auto max-w-3xl text-center">
-          <p className="text-[10px] uppercase tracking-widest text-white/35 mb-4">Process</p>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6 text-white">
+          <p className="text-[10px] uppercase tracking-widest text-gray-400 mb-4">Process</p>
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6 text-gray-900">
             A clean rollout. No chaos.
           </h1>
-          <p className="text-lg text-white/55">
+          <p className="text-lg text-gray-500">
             Precision engineering from day one to launch.
           </p>
         </div>
@@ -74,9 +74,9 @@ export default function Process() {
                     className="w-[calc(100%-6rem)] md:w-[calc(50%-4rem)] p-6 card-premium transition-all duration-300"
                     style={{ background: CB, border: `1px solid ${BD}` }}
                   >
-                    <h3 className="text-2xl font-bold mb-3 text-white">{step.title}</h3>
-                    <p className="font-medium text-sm mb-3 text-white/75">{step.desc}</p>
-                    <p className="text-xs text-white/40 leading-relaxed">{step.detail}</p>
+                    <h3 className="text-2xl font-bold mb-3 text-gray-900">{step.title}</h3>
+                    <p className="font-medium text-sm mb-3 text-gray-700">{step.desc}</p>
+                    <p className="text-xs text-gray-400 leading-relaxed">{step.detail}</p>
                   </div>
                 </div>
               ))}
@@ -88,9 +88,10 @@ export default function Process() {
             className="mt-24 p-8 text-center max-w-md mx-auto"
             style={{ border: `1px solid ${PB}`, background: PD }}
           >
-            <p className="text-sm font-bold uppercase tracking-widest text-white/40 mb-2">Timeline</p>
-            <p className="text-4xl font-heading font-bold text-white">7 – 14 Days</p>
-            <p className="text-xs mt-2 text-white/45">Typical launch duration</p>
+            <p className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-2">Timeline</p>
+            <p className="text-4xl font-heading font-bold text-gray-900">7 – 14 Days</p>
+            <p className="text-xs mt-2 text-gray-500">Typical launch duration</p>
+
           </div>
 
           {/* CTA */}
